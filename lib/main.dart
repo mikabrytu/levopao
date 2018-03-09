@@ -1,34 +1,45 @@
 import 'package:flutter/material.dart';
 
-void main() => runApp(new MyApp());
+void main() => runApp(new MainApp());
 
-class MyApp extends StatelessWidget {
+class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
       title: 'Levo Pão',
-      theme: new ThemeData(primarySwatch: Colors.deepPurple[800]),
-      home: new MyHomePage(title: 'Flutter Demo Home Page')
+      theme: new ThemeData(primaryColor: Colors.deepPurple[800]),
+      home: new MainContent(title: 'Levo Pão')
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
+class MainContent extends StatefulWidget {
+  MainContent({Key key, this.title}) : super(key: key);
 
   final String title;
 
   @override
-  _MyHomePageState createState() => new _MyHomePageState();
+  _MainContentState createState() => new _MainContentState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-
+class _MainContentState extends State<MainContent> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new AppBar(title: new Text(widget.title)),
-      body: new Center(child: new Text("Levo Pão"))
+      body: _buildMain()
+    );
+  }
+
+  Widget _buildMain() {
+    return new GridView.count(
+      crossAxisCount: 5,
+      children: new List<Widget>.generate(10, (it) {
+        return new GridTile(child: new Card(
+          color: Colors.amber[200],
+          child: new Center(child: new Text("Quero pão $it"))
+        ));
+      }),
     );
   }
 }
